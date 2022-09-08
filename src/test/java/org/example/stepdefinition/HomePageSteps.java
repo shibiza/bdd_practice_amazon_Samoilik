@@ -47,12 +47,14 @@ public class HomePageSteps {
 */
 
     @Given("User is on Home Page")
-    public void userIsOnHomePage(){
-        homePage.open()
+    public void userIsOnHomePage() {
+        homePage.open();
     }
 
-@When("User opens the Deliver icon")
-    public void UserOpensTheDeliverIcon(){
-        homePage.
-}
+    @When("User opens the Deliver icon")
+    public void UserOpensTheDeliverIcon() {
+        homePage.openProfileDropDown();
+    }
+
+
 }

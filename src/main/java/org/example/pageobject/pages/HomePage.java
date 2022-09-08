@@ -5,18 +5,56 @@ import org.example.pageobject.modules.ProfileDropDownModule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
-    @FindBy(xpath = "//summary[@class=\"Header-link\"]/img")
-    private WebElement profileDropDownButton;
+
+    @FindBy(xpath = "//*[@id=\"glow-ingress-block\"]")
+    private WebElement deliverLocationDropDownModule;
+
+    @FindBy(xpath = "//*[@id=\"twotabsearchtextbox\"]")
+    private WebElement searchInputField;
+    @FindBy(xpath = "//*[@id=\"nav-search-submit-button\"]")
+    private WebElement searchButton;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public ProfileDropDownModule openProfileDropDown() {
-        profileDropDownButton.click();
 
-        return new ProfileDropDownModule(webDriver);
+    public HomePage open() {
+        webDriver.get("https://www.amazon.com/");
+        return this;
+    }
+
+    public DeliverLocationPopUpModule openProfileDropDown() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        webDriverWait.until(ExpectedConditions.visibilityOf(deliverLocationDropDownModule)).click();
+        return new DeliverLocationPopUpModule(webDriver);
+    }
+    /*
+    WebElement countryPoland = new WebDriverWait(webDriver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/a[contains(text(),'" + poland + "')]")));
+            countryPoland.click();
+     */
+    public SearchResultPage searchOnSearchFieldByData(String searchData) {
+        webDriverWait.until(ExpectedConditions.visibilityOf(searchInputField)).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        webDriverWait.until(ExpectedConditions.visibilityOf(searchInputField)).sendKeys(searchData);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        webDriverWait.until(ExpectedConditions.visibilityOf(searchButton)).click();
+        return new SearchResultPage(webDriver);
     }
 }

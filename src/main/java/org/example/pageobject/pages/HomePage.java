@@ -1,7 +1,7 @@
 package org.example.pageobject.pages;
 
 import org.example.pageobject.BasePage;
-import org.example.pageobject.modules.ProfileDropDownModule;
+import org.example.pageobject.modules.DeliverLocationPopUpModule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,13 +14,14 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"twotabsearchtextbox\"]")
     private WebElement searchInputField;
+
     @FindBy(xpath = "//*[@id=\"nav-search-submit-button\"]")
     private WebElement searchButton;
+
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
-
 
     public HomePage open() {
         webDriver.get("https://www.amazon.com/");
@@ -37,6 +38,7 @@ public class HomePage extends BasePage {
         webDriverWait.until(ExpectedConditions.visibilityOf(deliverLocationDropDownModule)).click();
         return new DeliverLocationPopUpModule(webDriver);
     }
+
     /*
     WebElement countryPoland = new WebDriverWait(webDriver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/a[contains(text(),'" + poland + "')]")));
             countryPoland.click();

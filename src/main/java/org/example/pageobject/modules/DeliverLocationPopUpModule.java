@@ -32,7 +32,7 @@ public class DeliverLocationPopUpModule extends BasePage {
         super(webDriver);
     }
 
-//    public String getPostalCodeInputField() {
+    //    public String getPostalCodeInputField() {
 //        postalCodeInputField = new WebDriverWait(webDriver, Duration.ofSeconds(10))
 //                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[text()=\"shibiza\"]")));
 //        return postalCodeInputField.getText();

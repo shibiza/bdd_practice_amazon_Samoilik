@@ -17,17 +17,31 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"nav-search-submit-button\"]")
     private WebElement searchButton;
-
-
+    @FindBy(xpath = "//*[@id=\"glow-ingress-line2\"]")
+    private WebElement currentZipCode;
+    @FindBy(xpath = "//*[@id=\"glow-ingress-block\"]")
+    private WebElement currentCountry;
     public HomePage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public HomePage open() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         webDriver.get("https://www.amazon.com/");
         return this;
     }
-
+    public String getCurrentZipCode(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return currentZipCode.getText();
+    }
     public DeliverLocationPopUpModule openProfileDropDown() {
         try {
             Thread.sleep(3000);
@@ -38,7 +52,14 @@ public class HomePage extends BasePage {
         webDriverWait.until(ExpectedConditions.visibilityOf(deliverLocationDropDownModule)).click();
         return new DeliverLocationPopUpModule(webDriver);
     }
-
+    public String getCurrentCountry(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return currentCountry.getText();
+    }
     /*
     WebElement countryPoland = new WebDriverWait(webDriver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/a[contains(text(),'" + poland + "')]")));
             countryPoland.click();

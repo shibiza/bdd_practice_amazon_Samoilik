@@ -10,51 +10,35 @@ import org.testng.Assert;
 import static org.example.stepdefinition.BaseSteps.webDriver;
 
 public class HomePageSteps {
-
+    public String poland = "Poland";
+    public String zip = "90210";
     HomePage homePage = new HomePage(webDriver);
-/*
-  Scenario: zip code 90210 is present
-    Given User is on Home Page
-    When User opens the Deliver icon
-    And In opened pop up User enters zipcode as 90210
-    Then User sees the possibility to delivery to 90210
 
-  Scenario: the value is updated.
-    Given User is on Home Page
-    When User opens the Deliver icon
-    And In opened pop up User choose country Poland
-    Then User sees Poland country is presented
-
-
-  Scenario: shipping item to Poland.
-    Given User is on Home Page
-    When User opens the Deliver icon
-    And In opened pop up User choose country Poland
-    And User choose headset and click
-    Then Shipping to Poland is possible
-
-    @Given("User is on Index Page")
-    public void userIsOnIndexPage(){
-        indexPage.openIndexPage();
-    }
-
-    @When("User opens Gaming Keyboards Category Page")
-    public void userOpensGamingCategoryPage(){
-        indexPage.openGamingKeyboardsPage();
-    }
-}
-
-*/
 
     @Given("User is on Home Page")
-    public void userIsOnHomePage() {
+    public void user_is_on_home_page() {
         homePage.open();
     }
 
     @When("User opens the Deliver icon")
-    public void UserOpensTheDeliverIcon() {
+    public void user_opens_the_deliver_icon() {
         homePage.openProfileDropDown();
     }
-
-
+    @Then("User sees the possibility to delivery to 90210")
+    public void user_sees_the_possibility_to_delivery_to_90210(){
+        String currentZipCode = homePage.getCurrentZipCode();
+        boolean isZipCodeValide = currentZipCode.contains(zip);
+        Assert.assertEquals(true,isZipCodeValide);
+    }
+    @Then("User sees Poland country is presented")
+    public void user_sees_poland_country_is_presented(){
+        String currentCountry = homePage.getCurrentCountry();
+        System.out.println(currentCountry);
+        boolean isValidCountry = currentCountry.contains(poland);
+        Assert.assertEquals(true,isValidCountry);
+    }
+    @And("User choose headset and click")
+    public void user_choose_headset_and_click(){
+        homePage.searchOnSearchFieldByData("headphones");
+    }
 }
